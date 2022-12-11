@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'activity/css/signup.css' %}">
+</head>
+<body>
+    <main>
+        <div class="form-container">
+            <div class="form-section">
+                <div class="profile">
+                    <div class="form-name">
+                        <h1>Actvi.</h1>
+                        <p>@Signup</p>
+                    </div>
+                </div>
+                <div class="main-form">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="name-date">
+
+                            <input id="activity-name" type="text" placeholder="FirstName" name="first_name">
+                            <input id="activity-date" type="text" placeholder="Last Name" name="last_name">
+
+                        </div>
+                        <div class="text">
+                            <input id="username" type="text" placeholder="Username" name="username">
+                        </div>
+                        <div class="open-close-date">
+                            <input id="activity-open-date" type="password" placeholder="Password" name="password1">
+                            <input id="activity-close-date" type="password" placeholder="Confirm password" name="password2">
+                        </div>
+                        <div class="text">
+                            <textarea id="activity-description" placeholder="Bio" name="userBio"></textarea>
+                        </div>
+                        
+                        <div class="pro-img">
+                            <label for="Image">Profile Image:</label>
+                            <input id="profileImage" type="file" placeholder="image" name="profileImage">
+                        </div>
+                        <input type="submit" id="form-submit" value="Create account">
+                        <p style="text-align: center;">Already have an account: <a href="{% url 'activity:login' %}">Signin</a></p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>
+
+<!-- <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.username.label }}
+    {{ form.username }}
+
+    {{ form.email.label }}
+    {{ form.email }}
+
+    {{ form.first_name.label }}
+    {{ form.first_name }}
+
+    {{ form.last_name.label }}
+    {{ form.last_name }}
+
+    {{ form.password1.label }}
+    {{ form.password1 }}
+
+    {{ form.password2.label }}
+    {{ form.password2 }}
+
+    {{ form.profileImage.label }}
+    {{ form.profileImage }}
+
+    {{ form.errors }}
+
+    <input type="submit" value="create">
+</form> -->

@@ -1,0 +1,145 @@
+{% include "activity/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'activity/css/user.css' %}">
+</head>
+<main>
+    <div class="profile-section">
+        <div class="profile-container" onclick="toEditPro()" style="cursor: pointer;">
+            <div class="profile-edit">
+                <img src="{% static 'activity/img/edit.png' %}" alt="" >
+            </div>
+            <div class="profile-picture">
+                <img src="/images/{{ request.user.profileImage }}" alt="">
+            </div>
+
+        </div>
+
+        <div class="user-info">
+            <div class="name">
+                <h1>{{ request.user.first_name | title }} {{ request.user.last_name | title }}</h1>
+                <p>@{{ request.user.username }}</p>
+            </div>
+            <div class="activity-info-user">
+                <p class="host"> 
+                    <span class="number">
+                    {% if  hostCount > 9%}
+                        {{ hostCount }}                    
+                    {% elif hostCount == 0%}
+                        0
+                    {% else %}
+                        0{{ hostCount }}
+                    {%endif%}
+                    </span> Host
+                </p>
+
+                <p class="join">
+                    <span class="number">
+                    {% if  joinCount > 9%}
+                        {{ joinCount }}
+                    {% elif joinCount == 0%}
+                        0
+                    {% else %}
+                        0{{ joinCount }}
+                    {%endif%}
+                    </span> Join
+                </p>
+            </div>
+            <p class="bio">"{{ request.user.userBio }}"</p>
+        </div>
+    </div>
+
+
+
+    <div class="switcher">
+        <div class="create-activity">
+            <a href="{% url 'activity:create' %}">Create Activity</a>
+        </div>
+        <div class="switcher-button">
+            <div class="butt-user active" onclick="goYouHost()">Activity you host</div>
+            <div class="butt-user" onclick="goYouJoin()">Activity you join</div>
+        </div>
+        
+    </div>
+
+    <!-- ACTIVITY YOU HOST -->
+    <div class="activities">
+        {% if activities %}
+
+        {% for activity in activities %}
+
+        <div class="activity-card">
+            <div class="profile">
+                <div class="card-profile">
+                    <div class="profile-image">
+                        <img src="/images/{{ activity.activity.activityOrganizer.profileImage }}" alt="">
+                    </div>
+                    <div class="name">
+                        <div class="fullname">{{ activity.activity.activityOrganizer.first_name | title }} {{ activity.activity.activityOrganizer.last_name | title }}</div>
+                        <div class="username">@{{ activity.activity.activityOrganizer }}</div>
+                    </div>
+                </div>
+                <div class="time">{{ activity.activity.activityOpenDate | date:'d M Y' }}</div>
+            </div>
+
+            <div class="activity-info">
+                <div class="activity-detail">
+                    <p>{{ activity.activity.activityDate | date:'d F Y'}}</p>
+                    <p>{{ activity.activity.activityLocation }}</p>
+                    <h1>{{ activity.activity.activityTitle }}</h1>
+                    <p class="list">Particepance's List</p>
+                    <div class="par-list">
+                            {% for p in activity.particepance %}
+                            <!-- <h1>{{ p }}</h1> -->
+                                <div class="pro">
+                                    <img src="/images/{{ p.userID.profileImage }}" alt="">
+                                </div>
+                            {% endfor %}
+                        
+                            {% if activity.lastestParticepance > 5  %}
+                                <p class="extra">+{{ activity.lastestParticepance|add:"-5" }}</p>
+                            {% endif %}
+                        
+                    </div>
+                </div>
+                <div class="activity-action">
+                    
+                    <div class="butt detail-button">
+                        <a href="{% url 'activity:more-info' activity.activity.id %}">More Information</a>
+                    </div>
+                    
+                    <div class="butt detail-button">
+                        <a href="{% url 'activity:update' activity.activity.id %}">Edit Activity</a>
+                    </div>
+                    <div class="butt join-button">
+                        <form id="join-form">
+                            <a href="{% url 'activity:delete' activity.activity.id %}">Delete Activity</a>
+                        </form>
+                        <!-- <a href="#">Join now</a> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}        
+        {% else %}
+
+        <p style="text-align: center; margin-top: 10rem;">You haven't host any activity yet</p>
+
+        {% endif %}
+
+    </div>
+
+<script>
+    const goYouHost = () => {
+        window.location.href = "{% url 'activity:profile-host' %}";
+    }
+
+    const goYouJoin = () => {
+        window.location.href = "{% url 'activity:profile-join' %}";
+    }
+</script>
+</main>
+
+{% endblock %}

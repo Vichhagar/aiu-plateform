@@ -1,0 +1,150 @@
+{% include "activity/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'activity/css/more-infor.css' %}">
+</head>
+<div class="card-container">
+    <div class="activity-card">
+        <div class="profile">
+            <div class="card-profile">
+                <div class="profile-image">
+                    <img src="/images/{{ activity.activityOrganizer.profileImage}}" alt="">
+                </div>
+                <div class="name">
+                    <div class="fullname">{{ activity.activityOrganizer.first_name | title }} {{ activity.activityOrganizer.last_name | title }}</div>
+                    <div class="username">@{{ activity.activityOrganizer.username}}</div>
+                </div>
+            </div>
+            <div class="time">{{ activity.activityOpenDate | date:'d M Y' }}</div>
+        </div>
+
+        <div class="activity-info">
+            <div class="activity-detail">
+                <p>{{ activity.activityDate | date:'d F Y'}}</p>
+                <p>{{ activity.activityLocation }}</p>
+
+                {% if activity.activityOrganizer.id !=  request.user.id%}
+                
+                {% if request.user.id in listPar %}
+                    <div class="butt leave-button">
+                        <form id="join-form">
+                            {% csrf_token %}
+                            <input type="hidden" id="userID" name="userID" value="{{ request.user.id }}">
+                            <input type="hidden" id="activityID" name="activityID" value="{{ activity.id }}">
+                            <input id="leave-butt" type="submit" value="Leave" data-tosend="{{ activity.id }}">
+                        </form>
+                    </div>
+                {% elif listPar|length  == 0 %}
+                <div class="butt join-button">
+                    <form id="join-form">
+                        {% csrf_token %}
+                        <input type="hidden" id="userID" name="userID" value="{{ request.user.id }}">
+                        <input type="hidden" id="activityID" name="activityID" value="{{ activity.id }}">
+                        <input id="join-butt" type="submit" value="Join now" data-tosend="{{ activity.id }}">
+                    </form>
+                </div>
+                {% else %}
+                    <div class="butt join-button">
+                        <form id="join-form">
+                            {% csrf_token %}
+                            <input type="hidden" id="userID" name="userID" value="{{ request.user.id }}">
+                            <input type="hidden" id="activityID" name="activityID" value="{{ activity.id }}">
+                            <input id="join-butt" type="submit" value="Join now" data-tosend="{{ activity.id }}">
+                        </form>
+                    </div>
+                {% endif %}
+
+                {% else %}
+                <div class="butt join-button">
+                    <form id="join-form">
+                        {% csrf_token %}
+                        <input type="hidden" id="userID" name="userID" value="{{ request.user.id }}">
+                        <input type="hidden" id="activityID" name="activityID" value="{{ activity.id }}">
+                        <input id="join-butt" type="submit" value="You're the host" data-tosend="{{ activity.id }}" disabled>
+                    </form>
+                </div>
+                {% endif %}
+                
+                
+
+
+
+                    <!-- <a href="#">Join now</a> -->
+                
+                <h1>{{ activity.activityTitle | title }}</h1>
+
+                {{ activity.activityDiscription | safe }}
+
+
+            </div>
+            <div class="activity-action">
+                <p class="list">Particepance's List</p>
+                <div class="par-list">
+
+                    {% for par in parList %}
+                    <div class="proo">
+                        <div class="pro"> 
+                            <img src="/images/{{ par.userID.profileImage }}" alt="">
+                        </div>
+
+                        <div class="name">
+                            <h4>{{ par.userID.first_name }} {{ par.userID.last_name }}</h4>
+                            <p>@{{ par.userID.username }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $(document).on('click', '#join-butt', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'activity:join' %}",
+            data: {
+                userID: $('#userID').val(),
+                activityID: e.target.dataset.tosend,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(data) {
+                console.log(data)
+                // console.log("DONE!")
+                // console.log(data)
+                // $("#join-form")[0].reset();
+                location.reload();
+            }
+        })
+        $("#join-form")[0].reset();
+
+    })
+
+    $(document).on('click', '#leave-butt', function(e) {
+        e.preventDefault();
+        console.log(e.target.dataset.tosend)
+        $.ajax({
+            type: 'POST',
+            // url: `/deleteActivity/${$('#userID').val()}/${e.target.dataset.tosend}`,
+            url: "{% url 'activity:leave' %}",
+            data: {
+                userID: $('#userID').val(),
+                activityID: e.target.dataset.tosend,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(data) {
+                console.log(data)
+                // console.log("DONE!")
+                // console.log(data)
+                // $("#join-form")[0].reset();
+                location.reload();
+            }
+        })
+        $("#leave-form")[0].reset();
+    })
+</script>
+
+{% endblock %}

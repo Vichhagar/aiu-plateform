@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.profile-section {
+    margin-top: 3rem;
+}
+
+
+.profile-container {
+    position: relative;
+}
+
+.profile-section, .switcher, .create-activity {
+    padding-inline: 25%;
+}
+
+.profile-section {
+    display: flex;
+}
+
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px #fff solid;
+    z-index: 0;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: inherit;
+    border-radius: inherit;
+}
+
+.profile-edit {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    bottom: 30px;
+    right: -5px;
+    z-index: 5;
+}
+
+.profile-edit img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: inherit;
+    border-radius: inherit;
+}
+
+.user-info {
+    margin-left: 3rem;
+    margin-block: auto;
+    line-height: 25px;
+}
+
+.user-info .name h1{
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    
+    line-height: 3rem;
+}
+
+.user-info .name p{
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.activity-info-user {
+    display: flex;
+}
+
+.activity-info-user p{
+    margin-right: 30px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.number {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.switcher {
+    margin-block: 2.5rem;
+}
+
+.create-activity {
+    background-color: #111;
+    border-radius: 50px;
+    text-align: center;
+    padding-block: 15px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.create-activity a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.switcher-button {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 5rem;
+    margin-bottom: -2rem;
+    border-radius: 10px;
+}
+
+.butt-user {
+    text-align: center;
+    width: 100%;
+    background-color: #111;
+    color: #fff;
+    padding: 1rem 0;
+    cursor: pointer;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.active {
+    background-color: #f6f6f6;
+    border-bottom: #111 3px solid;
+    padding-bottom: 1rem;
+    color: #111;
+    font-weight: bolder;
+    border-radius: 0;
+}
+/* text-align: center;
+width: 100%;
+border-bottom: #111 3px solid;
+padding-bottom: 1rem; */
+
+.activities {
+    padding-inline: 25%;
+}
+
+.activity-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-block: 3rem;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.profile-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.profile-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+}
+
+.fullname {
+    font-weight: bold;
+}
+
+.username {
+    font-size: 13px;
+}
+
+.activity-info {
+    max-width: 95%;
+    margin-inline: auto;
+    display: flex;
+}
+
+.activity-detail {
+    width: 50%;
+}
+
+.activity-detail h1{
+    margin-block: 1rem;
+    font-size: 2.3rem;
+    font-weight: bolder;
+}
+
+.activity-detail .par-list {
+    display: flex;
+    margin-top: 5px;
+}
+
+.pro {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: #fff 2px solid;
+    margin-right: -7px;
+}
+
+.pro img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.extra {
+    margin-block: auto;
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.activity-detail {
+    border-right: 5px #111 solid;
+    padding-right: 2rem;
+}
+
+.activity-action {
+    margin-block: auto;
+    margin-left: 2rem;
+    width: 50%;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #207C18;
+    margin-right: 1rem;
+    border-radius: 50%;
+}
+
+.activity-status {
+    display: flex;
+    align-items: center;
+    border: 3px solid #207C18;
+    padding: 3px 5px;
+    color: #207C18;
+    border-radius: 50px;
+    /* width: 220px; */
+}
+
+.activity-status p {
+    font-weight: bold;
+}
+
+.notice {
+    margin-bottom: 1rem;
+}
+
+.butt {
+    width: 100%;
+    margin-block: 0.5rem;
+    border: #111 3px solid;
+    border-radius: 20px;
+    padding-block: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.butt a {
+    text-decoration: none;
+    text-align: center;
+    margin-block: auto;
+    color: #111;
+}
+
+.join-button {
+    background-color: #111;
+    font-weight: bolder;
+}
+
+.join-button form input[type=submit] {
+    background-color: inherit;
+    color: #fff;
+    font-weight: bolder;
+    border: none;
+    font-size: 1rem;
+    cursor: inherit;
+}
+
+.join-button a {
+    color: #fff;
+}
+
+/* Leave */
+.leave-button {
+    border: rgb(222, 16, 16) 3px solid;
+    background-color: rgb(222, 16, 16);
+    font-weight: bolder;
+}
+
+.leave-button form input[type=submit] {
+    background-color: inherit;
+    color: #fff;
+    font-weight: bolder;
+    border: none;
+    font-size: 1rem;
+    cursor: inherit;
+}
+
+.leave-button a {
+    color: #fff;
+}

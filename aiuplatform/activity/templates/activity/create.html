@@ -1,0 +1,46 @@
+{% extends "activity/base.html" %}
+{% load static %}
+
+{% block content%}
+<head>
+    <link rel="stylesheet" href="{% static 'activity/css/form.css' %}">
+</head>
+<main>
+    <div class="form-container">
+        <div class="cover">
+            <img src="{% static 'activity/img/5.jpg' %}" alt="">
+        </div>
+        <div class="form-section">
+            <div class="profile">
+                <div class="form-profile-img">
+                    <img src="/images/{{ request.user.profileImage }}" alt="">
+                </div>
+                <div class="form-name">
+                    <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+                    <p>@{{ request.user.username }}</p>
+                </div>
+            </div>
+            <div class="main-form">
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="name-date">
+                        <input id="activity-name" name="activityTitle" type="text" placeholder="Activity Name">
+                        <input id="activity-location" name="activityLocation" type="text" placeholder="Activity Location">
+                        <input id="activity-date" name="activityDate" type="text" placeholder="Activity Date" onfocus="(this.type='datetime-local')">
+                    </div>
+                    <div class="text">
+                        <textarea id="activity-description" name="activityDiscription" placeholder="Activity Description"></textarea>
+                    </div>
+                    <div class="open-close-date">
+                        <input id="activity-open-date" name="activityOpenDate" type="text" placeholder="Open Date" onfocus="(this.type='datetime-local')">
+                        <input id="activity-close-date" name="activityCloseDate" type="text" placeholder="Close Date" onfocus="(this.type='datetime-local')">
+                    </div>
+                    <input type="submit" id="form-submit" value="Post Activity">
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

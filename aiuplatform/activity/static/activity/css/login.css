@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f6f6f6;
+}
+
+.form-container {
+    max-width: 40%;
+    margin-inline: auto;
+    background-color: #fff;
+    display: flex;
+    border-radius: 10px;
+    margin-block: auto;
+    margin-top: 6rem;
+    position: relative;
+    overflow-y: scroll;
+}
+
+.form-container::-webkit-scrollbar {
+    display: none;
+}
+
+.cover {
+    width: 100%;
+    height: 100vh;
+    border-radius: 10px;
+    text-align: left;
+    margin-block: auto;
+}
+
+.cover h1 {
+    margin-block: 0.5rem;
+    transform: translate(25%, 600%);
+}
+
+.cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+}
+
+.form-section {
+    padding: 1.5rem;
+    width: 100%;
+}
+
+.form-section .profile {
+    display: flex;
+    margin-block: 1rem;
+}
+
+.form-profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.form-name {
+    margin-block: auto;
+    text-align: left;
+}
+
+.form-name h1 {
+    font-size: 4rem;
+    font-weight: bolder;
+}
+
+.profile .welcome {
+    margin-block: auto;
+    margin-left: 4rem;
+    font-size: 1rem;
+    /* font-weight: bold; */
+    padding-left: 1rem;
+    border-left: 2px #111 solid;
+}
+
+.form-name p {
+    font-size: 1.5rem;
+}
+
+.main-form {
+    margin-block: auto;
+}
+
+form input {
+    height: 40px;
+    margin-block: 1rem;
+    border: none;
+    border-bottom: 1px #111 solid;
+}
+
+#activity-name {
+    width: 55%;
+}
+
+#activity-date {
+    width: 40%;
+}
+
+#activity-description {
+    border-radius: 10px;
+    padding: 0.5rem;
+    /* border: 2px #111 solid; */
+    resize: none;
+    width: 100%;
+    /* height: 25vh; */
+}
+
+.open-close-date {
+    display: flex;
+    justify-content: space-between;
+}
+
+#activity-open-date, #activity-close-date {
+    width: 45%;
+}
+
+#form-submit {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: #111;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bolder;
+}
+
+#username {
+    width: 100%;
+}
+
+.text input {
+    padding-inline: 1rem;
+}
+
+.message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: green;
+    width: 100%;
+    padding-inline: 1rem;
+    padding-block: 0.2rem;
+    color: #fff;
+    text-align: center;
+}
+
+.message p {
+    
+    font-size: 16px;
+}

@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f6f6f6;
+}
+
+.card-container {
+    margin-top: 9rem;
+    max-width: 70%;
+    margin-inline: auto;
+}
+
+.activity-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-block: 3rem;
+    height: 65vh;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.profile-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.profile-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+}
+
+.fullname {
+    font-weight: bold;
+}
+
+.username {
+    font-size: 13px;
+}
+
+.activity-info {
+    max-width: 95%;
+    margin-inline: auto;
+    display: flex;
+}
+
+.activity-detail {
+    width: 50%;
+}
+
+.activity-detail h1{
+    margin-block: 1rem;
+    font-size: 2.3rem;
+    font-weight: bolder;
+}
+
+.list {
+    margin-bottom: 1.5rem;
+}
+
+.activity-detail .par-list {
+    margin-top: 3rem;
+}
+
+.pro {
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: #fff 2px solid;
+    margin-right: 10px;
+}
+
+.pro img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+}
+
+.proo {
+    display: flex;
+    margin-block: 1rem;
+}
+
+.extra {
+    margin-block: auto;
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.activity-detail {
+    border-right: 5px #111 solid;
+    padding-right: 2rem;
+}
+
+.activity-action {
+    margin-left: 2rem;
+    width: 50%;
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+.activity-action::-webkit-scrollbar {
+    display: none;
+}
+
+.butt {
+    width: 100%;
+    margin-block: 0.5rem;
+    border: #111 3px solid;
+    border-radius: 20px;
+    padding-block: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.butt a {
+    text-decoration: none;
+    text-align: center;
+    margin-block: auto;
+    color: #111;
+}
+
+.join-button {
+    background-color: #111;
+    font-weight: bolder;
+}
+
+.join-button form input[type=submit] {
+    background-color: inherit;
+    color: #fff;
+    font-weight: bolder;
+    border: none;
+    font-size: 1rem;
+    cursor: inherit;
+}
+
+.join-button a {
+    color: #fff;
+}
+
+/* Leave */
+.leave-button {
+    border: rgb(222, 16, 16) 3px solid;
+    background-color: rgb(222, 16, 16);
+    font-weight: bolder;
+}
+
+.leave-button form input[type=submit] {
+    background-color: inherit;
+    color: #fff;
+    font-weight: bolder;
+    border: none;
+    font-size: 1rem;
+    cursor: inherit;
+}
+
+.leave-button a {
+    color: #fff;
+}
+
+

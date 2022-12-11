@@ -1,0 +1,69 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="{% static 'activity/css/login.css' %}">
+</head>
+<body>
+    <main>
+
+        <div class="form-container">
+            <div class="form-section">
+                <div class="profile">
+                    <div class="form-name"> 
+                        
+                        {% for m in messages %}       
+                            <div class="message">
+                                <p>{{ m }}</p>
+                            </div>
+                        {% empty %}
+                        {% endfor %}
+                        <h1>Actvi.</h1>
+                        <p>@Singin</p>
+                    </div>
+                </div>
+                <div class="main-form">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="text">
+                            <input id="username" type="text" placeholder="Username" name="username">
+                        </div>
+                        <div class="text">
+                            <input id="username" type="password" placeholder="Password" name="password">
+                        </div>
+
+                        <input type="submit" id="form-submit" value="Sign In">
+                        <p style="text-align: center;">Did not have an account yet: <a href="{% url 'activity:register' %}">Signup</a></p>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- <div class="cover">
+                <h1>Actvi.</h1>
+                <p>Create an account with us and join many activity.</p>
+            </div> -->
+        </div>
+    </main>
+</body>
+</html>
+<!-- <form method="post">
+    {% csrf_token %}
+    <label for="username">username</label>
+    <input type="text" name="username" id="username">
+
+    <label for="password">password</label>
+    <input type="password" name="password" id="password">
+
+    {% for m in messages %}
+        <p>{{ m }}</p>
+    {% endfor %}
+
+    <input type="submit" value="Login">
+</form> -->

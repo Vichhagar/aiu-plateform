@@ -1,0 +1,165 @@
+{% include "activity/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'activity/css/user.css' %}">
+</head>
+<main>
+    <div class="profile-section">
+        <div class="profile-container" onclick="toEditPro()" style="cursor: pointer;">
+            <div class="profile-edit">
+                <img src="{% static 'activity/img/edit.png' %}" alt="">
+            </div>
+            <div class="profile-picture">
+                <img src="/images/{{ request.user.profileImage }}" alt="">
+            </div>
+
+        </div>
+
+        <div class="user-info">
+            <div class="name">
+                <h1>{{ request.user.first_name | title }} {{ request.user.last_name | title }}</h1>
+                <p>@{{ request.user.username }}</p>
+            </div>
+            <div class="activity-info-user">
+                <p class="host"> 
+                    <span class="number">
+                    {% if  hostCount > 9%}
+                        {{ hostCount }}                    
+                    {% elif hostCount == 0%}
+                        0
+                    {% else %}
+                        0{{ hostCount }}
+                    {%endif%}
+                    </span> Host
+                </p>
+
+                <p class="join">
+                    <span class="number">
+                    {% if  joinCount > 9%}
+                        {{ joinCount }}
+                    {% elif joinCount == 0%}
+                        0
+                    {% else %}
+                        0{{ joinCount }}
+                    {%endif%}
+                    </span> Join
+                </p>
+            </div>
+            <p class="bio">"{{ request.user.userBio }}"</p>
+        </div>
+    </div>
+
+
+
+    <div class="switcher">
+        <div class="create-activity">
+            <a href="{% url 'activity:create' %}">Create Activity</a>
+        </div>
+        <div class="switcher-button">
+            <div class="butt-user" onclick="goYouHost()">Activity you host</div>
+            <div class="butt-user active" onclick="goYouJoin()">Activity you join</div>
+        </div>
+        
+    </div>
+
+    <!-- ACTIVITY YOU HOST -->
+    <div class="activities">
+        {% for activity in activities %}
+
+        <div class="activity-card">
+            <div class="profile">
+                <div class="card-profile">
+                    <div class="profile-image">
+                        <img src="/images/{{ activity.activity.activityOrganizer.profileImage }}" alt="">
+                    </div>
+                    <div class="name">
+                        <div class="fullname">{{ activity.activity.activityOrganizer.first_name | title }} {{ activity.activity.activityOrganizer.last_name | title }}</div>
+                        <div class="username">@{{ activity.activity.activityOrganizer }}</div>
+                    </div>
+                </div>
+                <div class="time">{{ activity.activity.activityOpenDate | date:'d M Y' }}</div>
+            </div>
+
+            <div class="activity-info">
+                <div class="activity-detail">
+                    <p>{{ activity.activity.activityDate | date:'d F Y'}}</p>
+                    <p>{{ activity.activity.activityLocation }}</p>
+                    <h1>{{ activity.activity.activityTitle }}</h1>
+                    <p class="list">Particepance's List</p>
+                    <div class="par-list">
+                            {% for p in activity.particepance %}
+                            <!-- <h1>{{ p }}</h1> -->
+                                <div class="pro">
+                                    <img src="/images/{{ p.userID.profileImage }}" alt="">
+                                </div>
+                            {% endfor %}
+                        
+                            {% if activity.lastestParticepance > 5  %}
+                                <p class="extra">+{{ activity.lastestParticepance|add:"-5" }}</p>
+                            {% endif %}
+                        
+                    </div>
+                </div>
+                <div class="activity-action">
+                    <div class="activity-status">
+                        <div class="dot"></div>
+                        <p>Open until {{ activity.activity.activityCloseDate | date:'d M Y' }}</p>
+                    </div>
+                    <p class="notice">please join the event before the closing date.</p>
+                    
+                    <div class="butt leave-button">
+                        <form id="join-form">
+                            {% csrf_token %}
+                            <input type="hidden" id="userID" name="userID" value="{{ request.user.id }}">
+                            <input type="hidden" id="activityID" name="activityID" value="{{ activity.id }}">
+                            <input id="leave-butt" type="submit" value="Leave" data-tosend="{{ activity.activity.id }}">
+                        </form>
+                    </div>
+
+                    <div class="butt detail-button">
+                        <a href="{% url 'activity:more-info' activity.activity.id %}">More Information</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p style="text-align: center; margin-top: 10rem;">You haven't join any activity yet (boring...)</p>
+        {% endfor %}
+    </div>
+
+<script>
+    const goYouHost = () => {
+        window.location.href = "{% url 'activity:profile-host' %}";
+    }
+
+    const goYouJoin = () => {
+        window.location.href = "{% url 'activity:profile-join' %}";
+    }
+
+    $(document).on('click', '#leave-butt', function(e) {
+        e.preventDefault();
+        console.log(e.target.dataset.tosend)
+        $.ajax({
+            type: 'POST',
+            // url: `/deleteActivity/${$('#userID').val()}/${e.target.dataset.tosend}`,
+            url: "{% url 'activity:leave' %}",
+            data: {
+                userID: $('#userID').val(),
+                activityID: e.target.dataset.tosend,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(data) {
+                console.log(data)
+                // console.log("DONE!")
+                // console.log(data)
+                // $("#join-form")[0].reset();
+                location.reload();
+            }
+        })
+        $("#leave-form")[0].reset();
+    })
+</script>
+</main>
+
+{% endblock %}
